@@ -4,7 +4,7 @@ import os
 def download_task(url):
     try:
         yt = YouTube(url)
-        video = yt.streams.filter(only_audio=True).first()
+        video = yt.streams.filter(only_audio=True).order_by("abr").desc().first()
         out_file = video.download(output_path="songs")
         base, ext = os.path.splitext(out_file)
         new_file = base + '.mp3'
